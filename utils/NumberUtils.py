@@ -1,3 +1,7 @@
+from math import *
+
+from numpy import *
+
 
 def is_multiple_of(x, y):
     """ Return true if x is a multiple of y, false otherwise """
@@ -15,28 +19,44 @@ def is_even(x):
 
 def is_prime(x):
     """ Return true is x is prime, false otherwise """
-    prime = True
-    y = x
+    prime = False
+    root = sqrt(x)
+    first_prime = 2
+    primes = [first_prime]
+    next_prime = first_prime
 
-    while prime:
-        y -= 1
-
-        if y < 1:
-            prime = False
+    while not prime:
+        if is_multiple_of(x, next_prime):
             break
-        elif y == 1:
+        elif next_prime > root:
+            prime = True
             break
-        elif is_multiple_of(x, y):
-            prime = False
+        else:
+            next_prime = find_next_prime(primes)
+            primes += [next_prime]
 
     return prime
 
 
-def find_next_prime(previous_prime):
-    """ Return the closest bigger prime than the one in parameter """
-    next_number = previous_prime + 1
+def find_next_prime(primes):
+    """ Return the bigger prime closest to the ones in parameter """
 
-    while not is_prime(next_number):
+    next_number = primes[len(primes) - 1]
+    found = False
+
+    while not found:
+
+        i = 0
         next_number += 1
+        root = sqrt(next_number)
+
+        while not is_multiple_of(next_number, primes[i]) and not found:
+            if primes[i] > root:
+                found = True
+                break
+            elif (len(primes) - 1) == i:
+                break
+            else:
+                i += 1
 
     return next_number
