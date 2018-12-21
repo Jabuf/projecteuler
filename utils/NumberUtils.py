@@ -19,6 +19,7 @@ def is_even(x):
 
 def is_prime(x):
     """ Return true is x is prime, false otherwise """
+
     prime = False
     root = sqrt(x)
     first_prime = 2
@@ -26,6 +27,8 @@ def is_prime(x):
     next_prime = first_prime
 
     while not prime:
+        if x == 1:
+            break
         if is_multiple_of(x, next_prime):
             break
         elif next_prime > root:
