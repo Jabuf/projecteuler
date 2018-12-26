@@ -5,11 +5,10 @@ from numpy import *
 
 def is_multiple_of(x, y):
     """ Return true if x is a multiple of y, false otherwise """
-    multiple_of = False
-    if y != 0:
-        multiple_of = x % y == 0
-
-    return multiple_of
+    try:
+        return x % y == 0
+    except ZeroDivisionError:
+        return False
 
 
 def is_even(x):
@@ -20,46 +19,45 @@ def is_even(x):
 def is_prime(x):
     """ Return true is x is prime, false otherwise """
 
+    if x == 1:
+        return False
+
+    primes = []
+    next_prime = find_next_prime(primes)
     prime = False
     root = sqrt(x)
-    first_prime = 2
-    primes = [first_prime]
-    next_prime = first_prime
 
     while not prime:
-        if x == 1:
-            break
-        if is_multiple_of(x, next_prime):
-            break
-        elif next_prime > root:
-            prime = True
-            break
+        if next_prime > root:
+            return True
+        elif is_multiple_of(x, next_prime):
+            return False
         else:
             next_prime = find_next_prime(primes)
             primes += [next_prime]
-
-    return prime
 
 
 def find_next_prime(primes):
     """ Return the bigger prime closest to the ones in parameter """
 
-    next_number = primes[len(primes) - 1]
-    found = False
+    try:
+        next_number = primes[len(primes) - 1] + 1
+        found = False
+    except IndexError:
+        return 2
 
     while not found:
 
         i = 0
-        next_number += 1
         root = sqrt(next_number)
 
-        while not is_multiple_of(next_number, primes[i]) and not found:
+        while not is_multiple_of(next_number, primes[i]):
+
             if primes[i] > root:
-                found = True
-                break
+                return next_number
             elif (len(primes) - 1) == i:
                 break
             else:
                 i += 1
 
-    return next_number
+        next_number += 1
