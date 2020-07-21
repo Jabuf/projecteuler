@@ -1,41 +1,27 @@
 """
-https://projecteuler.net/problem=9
+https://projecteuler.net/problem=10
 
-A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
-a² + b² = c²
-For example, 3² + 4² = 9 + 16 = 25 = 5².
+The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 
-There exists exactly one Pythagorean triplet for which a + b + c = 1000.
-Find the product abc.
+Find the sum of all the primes below two million.
 """
 
 from locals import *
 
+TWO_MILLIONS = 2000000
+
 
 def solution():
-    a = 0
-    b = 0
-    c = 0
+    current_prime = 2
+    sum_primes = 0
+    primes = [current_prime]
 
-    found = False
+    while current_prime < TWO_MILLIONS:
+        sum_primes += current_prime
+        current_prime = find_next_prime(primes)
+        primes.insert(len(primes), current_prime)
 
-    while not found:
-
-        a += 1
-        b = a + 1
-
-        while not found:
-
-            c = 1000 - (a + b)
-
-            if a * a + b * b == c * c:
-                found = True
-            elif c == b or c < b:
-                break
-            else:
-                b += 1
-
-    return [a, b, c]
+    return sum_primes
 
 
 with Timer() as timed:
