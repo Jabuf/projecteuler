@@ -40,4 +40,5 @@ def solution():
 
 with Timer() as timed:
     print(solution())
+    print(solution()[0] * solution()[1] * solution()[2])
 print("Seconds taken: {0}".format(timed.elapsed))
