@@ -8,6 +8,7 @@ def extract_diagonal(matrix, k, upper, reverse=False):
     :param matrix: the matrix on which to extract the diagonal
     :param k: the diagonal to extract (0 is the middle diagonal)
     :param upper: if true extract the upper side of the matrix, otherwise the lower side
+    :param reverse: if false true extract the reverse diagonal (from the lower left to the upper right)
     :return: the diagonal
     """
     diagonal = []
