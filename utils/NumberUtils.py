@@ -28,7 +28,7 @@ def is_prime(x):
     if x in primes:
         return True
 
-    root = sqrt(x)
+    root = x ** (1 / 2)
 
     for i in range(0, len(primes)):
         if primes[i] > root:
@@ -60,7 +60,7 @@ def find_next_prime(previous_primes):
     while not found:
 
         i = 0
-        root = sqrt(next_number)
+        root = next_number ** (1 / 2)
 
         while not is_multiple_of(next_number, previous_primes[i]):
 
