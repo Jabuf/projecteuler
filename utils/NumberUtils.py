@@ -1,5 +1,4 @@
-from math import *
-from numpy import *
+import numpy
 
 primes = []  # the list of primes already found
 
@@ -14,7 +13,7 @@ def is_multiple_of(x, y):
 
 def is_even(x):
     """ Return true if x is even, false otherwise """
-    return is_multiple_of(x, 2)
+    return x % 2 == 0
 
 
 def is_prime(x):
