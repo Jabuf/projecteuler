@@ -9,15 +9,12 @@ from locals import *
 
 
 def solution():
-    numbers_of_primes = 0
-    x = 0
+    primes_found = []
 
-    while numbers_of_primes < 10001:
-        x += 1
-        if is_prime(x):
-            numbers_of_primes += 1
+    while len(primes_found) < 10001:
+        primes_found += [find_next_prime(primes_found)]
 
-    return x
+    return primes_found[len(primes_found)-1]
 
 
 with Timer() as timed:
