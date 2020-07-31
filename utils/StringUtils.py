@@ -1,3 +1,6 @@
+import inflect
+
+
 def is_palindrome(string):
     palindrome = False
     string_length = len(string)
@@ -20,3 +23,8 @@ def inverse_string(string):
         inversed_string += string[i - 1]
 
     return inversed_string
+
+
+def number_to_words(n):
+    p = inflect.engine()
+    return p.number_to_words(n)
