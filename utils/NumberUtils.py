@@ -1,5 +1,3 @@
-import numpy
-
 primes = []  # the list of primes already found
 
 
@@ -50,27 +48,29 @@ def is_prime(x):
 
 def find_next_prime(previous_primes):
     """ Return the bigger prime closest to the ones in parameter """
-    try:
-        next_number = previous_primes[len(previous_primes) - 1] + 1
-        found = False
-    except IndexError:
+    if not previous_primes:
         return 2
 
-    while not found:
+    n = len(previous_primes) - 1
+    next_number = previous_primes[n] + 2
+
+    try:
+        previous_primes[1]
+    except IndexError:
+        next_number = 3
+
+    while True:
 
         i = 0
         root = next_number ** (1 / 2)
 
         while not is_multiple_of(next_number, previous_primes[i]):
-
             if previous_primes[i] > root:
                 return next_number
-            elif (len(previous_primes) - 1) == i:
-                break
             else:
                 i += 1
 
-        next_number += 1
+        next_number += 2
 
 
 def get_integer_decomposition(x):
